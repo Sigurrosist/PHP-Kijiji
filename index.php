@@ -13,28 +13,65 @@
 <span class="navbar-toggler-icon"></span>
 </button>
 
+
 <div class="d-flex justify-content-end">
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
+<!-- Start Home button (Current) -->
       <li class="nav-item active">
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
+<!-- Start Register button -->
         <a class="nav-link" href="#">Register</a>
       </li>
       <li class="nav-item">
+<!-- Start Post button -->
         <a class="nav-link" href="#">Post</a>
       </li>
       <li class="nav-item">
+<!-- Start Language button -->
         <a class="nav-link" href="#">EN / FR</a>
       </li>
       <li class="nav-item">
+<!-- Start Login button -->
         <a class="nav-link" href="#">Log In</a>
       </li>
-      <li class="nav-item dropdown">
     </ul>
+   </div>
 </div>
 </nav>
+<!--  Special Ads  -->
+<a href="#"><p class="display-4">Special Ads </p></a>
+<div class="card-group">
+<!-- First Card -->
+<div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="..." alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+<!-- Second Card -->
+<div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="..." alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+<!-- Third Card -->
+<div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="..." alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+</div>
 
 
 
