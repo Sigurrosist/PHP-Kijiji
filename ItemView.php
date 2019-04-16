@@ -72,74 +72,66 @@
   </div>
 </div>
 </div>
-        
-        
+
+
 <!-- divider -->
-        
+
 <div>
 <p class = "display-4 text-center"> - - - </p>
 </div>
-        
+
 <!-- divider end -->
-        
+
 <!-- Title   -->
-<div class = "container  p-3 mb-2 bg-light text-dark">
+<div class = "container p-3 mb-2 bg-light text-dark">
 	<p class="h3 p-3 text-center"> Ad Title - Selling car for 6k Audi Good condition </p>
 </div>
 <!-- Title end-->
-        
-<!-- Category -->
+
+<!-- Info Table -->
 <div class="container p-3">
-<div class = "row">
-        
-	<!-- First Category -->
-	<div class = "col-md-4">
-	<h4> first category </h4>
-	<!-- Sub Category for First Category start -->
-		<ul>
-		<li>Whatever second category</li>
-		<li>Whatever second category</li>
-		<li>Whatever second category</li>
-		</ul>
-	<!-- Sub Category for First Category end -->
-	</div>
-	<!-- First Category end-->
-        
-	<!-- Second Category -->
-	<div class = "col-md-4">
-	<h4> second category </h4>
-	<!-- Sub Category for Second Category start -->
-		<ul>
-		<li>Whatever second category</li>
-		<li>Whatever second category</li>
-		<li>Whatever second category</li>
-		</ul>
-	<!-- Sub Category for Second Category end -->
-	</div>
-	<!-- Second Category end -->
-        
-	<!-- Third Category -->
-	<div class = "col-md-4">
-	<h4> third category </h4>
-	<!-- Sub Category for Third Category start -->
-		<ul>
-		<li>Whatever second category</li>
-		<li>Whatever second category</li>
-		<li>Whatever second category</li>
-		</ul>
-	<!-- Sub Category for Third Category end -->
-	</div>
-	<!-- Third Category end -->
-        
-        
+  <table class="table">
+    <tbody>
+      <tr>
+        <th>Price : </th>
+        <td><?php // price ?></td>
+        <th>Seller : </th>
+        <td><?php // seller name?></td>
+      </tr>
+      <tr>
+        <th>Address : </th>
+        <td><?php // seller area ?></td>
+        <th>Phone : </th>
+        <td><?php // seller phone ?></td>
+      </tr>
+    </tbody>
+  </table>
 </div>
+<!-- Info Table end -->
+<!-- Image display -->
+<div class= "container text-center p-3 border border-success rounded">
+  <a href="#" >
+  <img src="<?php // source address?>" alt="Item thumbnail" class="img-thumbnail">
+  </a>
+  <a href="#" >
+  <img src="<?php  // source address?>" alt="Item thumbnail" class="img-thumbnail">
+  </a>
+  <a href="#" >
+    <img src="<?php // source address ?>" alt="Item thumbnail" class="img-thumbnail">
+  </a>
 </div>
-        
-        
-        
-</body>
+<!-- Image display -->
+<!-- Ad Body -->
+<div class = "container p-3 mb-2 bg-light text-dark border border-success rounded">
+okidoki This is the body article of the selling item
+</div>
+<!-- Ad Body end -->
+<!-- Go back button -->
+<div class="container p-3 text-center">
+  <button type="button" class="btn btn-success">Go back to the items list</button> <button type="button" class="btn btn-primary">Message to the seller</button>
+</div>
+<!-- Go back button -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-</body>
-</html>
+</body></html>
