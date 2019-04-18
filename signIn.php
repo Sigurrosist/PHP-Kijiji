@@ -1,3 +1,9 @@
+<?php 
+include_once 'dbConfig.php';
+
+$connection = new PDO("mysql:host=$hostname;dbname=$dbname",$username,$password);
+echo "You are connected to $dbname <br/>";
+?>
 <!doctype html>
 <html lang="en">
   <head>
