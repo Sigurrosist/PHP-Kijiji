@@ -1,8 +1,7 @@
-<?php 
+<?php
 include_once 'dbConfig.php';
 
 $connection = new PDO("mysql:host=$hostname;dbname=$dbname",$username,$password);
-echo "You are connected to $dbname <br/>";
 ?>
 <!doctype html>
 <html lang="en">
@@ -56,7 +55,7 @@ echo "You are connected to $dbname <br/>";
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="registration.html">Registration</a>
+        <a class="nav-link" href="registration.php">Registration</a>
       </li>
     </ul>
   </div>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 include_once 'dbConfig.php';
 include_once 'Member.cls.php';
 
@@ -30,7 +30,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                     
                     if($register == true)
                     {
-                        echo '<script language="javascript"> alert("New member is registered. Please login.")</script>';
+                        echo '<script language="javascript"> alert("New member is registered. Please login.");</script>';
                         header("location:signin.php");
                     }
                 }
@@ -52,9 +52,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     }
 }
 
-   
-    
-   
+
+
+
 ?>
 
 <!doctype html>
