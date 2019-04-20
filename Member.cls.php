@@ -1,6 +1,6 @@
 <?php
 
-class Member 
+class Member
 {
     private $memberId;
     private $name;
@@ -14,7 +14,6 @@ class Member
     
     function __construct($name,$address,$city,$state,$phone,$email,$password,$memberType)
     {
-        $this->memberId = self::$sequence++;
         $this->name = $name;
         $this->address = $address;
         $this->city = $city;
@@ -33,7 +32,7 @@ class Member
     {
         return $this->memberId;
     }
-
+    
     /**
      * @return mixed
      */
@@ -41,7 +40,7 @@ class Member
     {
         return $this->name;
     }
-
+    
     /**
      * @return mixed
      */
@@ -49,7 +48,7 @@ class Member
     {
         return $this->address;
     }
-
+    
     /**
      * @return mixed
      */
@@ -57,7 +56,7 @@ class Member
     {
         return $this->city;
     }
-
+    
     /**
      * @return mixed
      */
@@ -65,7 +64,7 @@ class Member
     {
         return $this->state;
     }
-
+    
     /**
      * @return mixed
      */
@@ -73,7 +72,7 @@ class Member
     {
         return $this->phone;
     }
-
+    
     /**
      * @return mixed
      */
@@ -81,7 +80,7 @@ class Member
     {
         return $this->email;
     }
-
+    
     /**
      * @return mixed
      */
@@ -89,7 +88,7 @@ class Member
     {
         return $this->password;
     }
-
+    
     /**
      * @return mixed
      */
@@ -97,7 +96,7 @@ class Member
     {
         return $this->memberType;
     }
-
+    
     /**
      * @param mixed $memberId
      */
@@ -105,7 +104,7 @@ class Member
     {
         $this->memberId = $memberId;
     }
-
+    
     /**
      * @param mixed $name
      */
@@ -113,7 +112,7 @@ class Member
     {
         $this->name = $name;
     }
-
+    
     /**
      * @param mixed $address
      */
@@ -121,7 +120,7 @@ class Member
     {
         $this->address = $address;
     }
-
+    
     /**
      * @param mixed $city
      */
@@ -129,7 +128,7 @@ class Member
     {
         $this->city = $city;
     }
-
+    
     /**
      * @param mixed $state
      */
@@ -137,7 +136,7 @@ class Member
     {
         $this->state = $state;
     }
-
+    
     /**
      * @param mixed $phone
      */
@@ -145,7 +144,7 @@ class Member
     {
         $this->phone = $phone;
     }
-
+    
     /**
      * @param mixed $email
      */
@@ -153,7 +152,7 @@ class Member
     {
         $this->email = $email;
     }
-
+    
     /**
      * @param mixed $password
      */
@@ -161,7 +160,7 @@ class Member
     {
         $this->password = $password;
     }
-
+    
     /**
      * @param mixed $memberType
      */
@@ -169,7 +168,13 @@ class Member
     {
         $this->memberType = $memberType;
     }
-
+    
+    public function insertMember($connection)
+    {
+        $sql = "insert into member (Name, Address, City, State, Phone, Email, Password, MemberType) values ('$this->name', '$this->address', '$this->city', '$this->state', '$this->phone', '$this->email', '$this->password', $this->memberType)";
+        $insert = $connection->exec($sql);
+        return $insert;
+    }
     
     
 }
