@@ -1,4 +1,61 @@
+<?php 
+include_once 'dbConfig.php';
+include_once 'Member.cls.php';
 
+$connection = new PDO("mysql:host=$hostname;dbname=$dbname",$username,$password);
+
+
+if($_SERVER["REQUEST_METHOD"] == "POST")
+{
+    
+    if(isset($_POST["register"]))
+    {
+        
+        $email = $_POST["email"];
+        $name = $_POST["name"];
+        $address = $_POST["address"];
+        $city = $_POST["city"];
+        $state = $_POST["state"];
+        $phone = $_POST["phone"];
+        $password = $_POST["password"];
+        $passwordcheck = $_POST["passwordcheck"];
+        $membertype = $_POST["membertype"];
+        if($email != "" && $name != "" && $address != "" && $city != "" && $state != "" && $phone != "" && $password != "" && $membertype != "" )
+        {
+            if ($password==$passwordcheck)
+            {
+                try{
+                    $member = new Member($name, $address, $city, $state, $phone, $email, $password, $membertype);
+                    $register = $member->insertMember($connection);
+                    
+                    if($register == true)
+                    {
+                        echo '<script language="javascript"> alert("New member is registered. Please login.")</script>';
+                        header("location:signin.php");
+                    }
+                }
+                catch (PDOException $e)
+                {
+                    $_SESSION["connectionfail"] = "Connection Failed ".$e->getMessage();
+                    header("location:connectionError.php");
+                }
+            }
+            else
+            {
+                echo "<script type='text/javascript'>alert('Please check your password again.');</script>";
+            }
+        }
+        else
+        {
+            echo '<script language="javascript"> alert("Please enter all information.")</script>';
+        }
+    }
+}
+
+   
+    
+   
+?>
 
 <!doctype html>
 <html lang="en">
@@ -125,7 +182,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="#">member <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="signin.html">Sign in</a>
@@ -146,80 +203,82 @@
                     <div class="col-md-9 register-right">
                         <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Member</a>
+                                <a class="nav-link active" id="member-tab" data-toggle="tab" href="#member" role="tab" aria-controls="member" aria-selected="true">Member</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Admin</a>
+                                <a class="nav-link" id="admin-tab" data-toggle="tab" href="#admin" role="tab" aria-controls="admin" aria-selected="false">Admin</a>
                             </li>
                         </ul>
                         <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="tab-pane fade show active" id="member" role="tabpanel" aria-labelledby="member-tab">
                                 <h3 class="register-heading">Registration</h3>
-                                <div class="row register-form">
+                                <form class="row register-form" method="post" action="#">
                                     <div class="col-md-6">
+                                    <input type="hidden" name="membertype" value="1" />
                                       <div class="form-group">
-                                          <input type="email" class="form-control" placeholder="Your Email(Username)*" value="" />
+                                          <input type="email" name="email" class="form-control" placeholder="Your Email(Username)*" value="" />
                                       </div>
                                       <div class="form-group">
-                                          <input type="password" class="form-control" placeholder="Password *" value="" />
+                                          <input type="password" name="password" class="form-control" placeholder="Password *" value="" />
                                       </div>
                                       <div class="form-group">
-                                          <input type="password" class="form-control"  placeholder="Confirm Password *" value="" />
+                                          <input type="password" name="passwordcheck" class="form-control"  placeholder="Confirm Password *" value="" />
                                       </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Full Name *" value="" />
+                                            <input type="text" name="name" class="form-control" placeholder="Full Name *" value="" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                       <div class="form-group">
-                                          <input type="text" class="form-control" placeholder="Address *" value="" />
+                                          <input type="text" name="address" class="form-control" placeholder="Address *" value="" />
                                       </div>
                                       <div class="form-group">
-                                          <input type="text" class="form-control" placeholder="City *" value="" />
+                                          <input type="text" name="city" class="form-control" placeholder="City *" value="" />
                                       </div>
                                       <div class="form-group">
-                                          <input type="text" class="form-control" placeholder="State *" value="" />
+                                          <input type="text" name="state" class="form-control" placeholder="State *" value="" />
                                       </div>
                                         <div class="form-group">
-                                            <input type="text" minlength="10" maxlength="10" name="txtEmpPhone" class="form-control" placeholder="Your Phone *" value="" />
+                                            <input type="text" name="phone" minlength="10" maxlength="10" name="txtEmpPhone" class="form-control" placeholder="Your Phone *" value="" />
                                         </div>
-                                        <input type="submit" class="btnRegister"  value="Register"/>
+                                        <input type="submit" name="register" class="btnRegister"  value="Register"/>
                                     </div>
-                                </div>
+                                </form>
                             </div>
-                            <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="tab-pane fade show" id="admin" role="tabpanel" aria-labelledby="admin-tab">
                                 <h3  class="register-heading">Registration</h3>
-                                <div class="row register-form">
+                                <form class="row register-form" method="post" action="#">
                                     <div class="col-md-6">
+                                    <input type="hidden" name="membertype" value="2" />
                                       <div class="form-group">
-                                          <input type="email" class="form-control" placeholder="Your Email(Username)*" value="" />
+                                          <input type="email" name="email" class="form-control" placeholder="Your Email(Username)*" value="" />
                                       </div>
                                       <div class="form-group">
-                                          <input type="password" class="form-control" placeholder="Password *" value="" />
+                                          <input type="password" name="password" class="form-control" placeholder="Password *" value="" />
                                       </div>
                                       <div class="form-group">
-                                          <input type="password" class="form-control"  placeholder="Confirm Password *" value="" />
+                                          <input type="password" name="passwordcheck" class="form-control"  placeholder="Confirm Password *" value="" />
                                       </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Full Name *" value="" />
+                                            <input type="text" name="name" class="form-control" placeholder="Full Name *" value="" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                       <div class="form-group">
-                                          <input type="text" class="form-control" placeholder="Address *" value="" />
+                                          <input type="text" name="address" class="form-control" placeholder="Address *" value="" />
                                       </div>
                                       <div class="form-group">
-                                          <input type="text" class="form-control" placeholder="City *" value="" />
+                                          <input type="text" name="city" class="form-control" placeholder="City *" value="" />
                                       </div>
                                       <div class="form-group">
-                                          <input type="text" class="form-control" placeholder="State *" value="" />
+                                          <input type="text" name="state" class="form-control" placeholder="State *" value="" />
                                       </div>
                                         <div class="form-group">
-                                            <input type="text" minlength="10" maxlength="10" name="txtEmpPhone" class="form-control" placeholder="Your Phone *" value="" />
+                                            <input type="text" name="phone" minlength="10" maxlength="10" class="form-control" placeholder="Your Phone *" value="" />
                                         </div>
-                                        <input type="submit" class="btnRegister"  value="Register"/>
+                                        <input type="submit" name="register" class="btnRegister"  value="Register"/>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
