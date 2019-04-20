@@ -1,29 +1,21 @@
 <?php
 
-class Subcategory extends Category
+class Subcategory 
 {
     private $subcategoryId;
     private $englishDesc;
     private $frenchDesc;
     
-    function __construct($englishDesc,$frenchDesc)
+    function __construct($subcategoryId=null,$englishDesc=null, $frenchDesc=null)
     {
-        parent::__construct();
-        $this->subcategoryId = self::$sequence++;
-        $this->englishDesc = $englishDesc;
-        $this->frenchDesc = $frenchDesc;
-    }
-    
-    function __construct($catEnglishDesc,$catfrenchDesc,$englishDesc,$frenchDesc)
-    {
-        parent::__construct($catEnglishDesc,$catfrenchDesc);
-        $this->subcategoryId = self::$sequence++;
+        
+        $this->subcategoryId = $subcategoryId;
         $this->englishDesc = $englishDesc;
         $this->frenchDesc = $frenchDesc;
     }
     
     /**
-     * @return mixed
+     * @return string
      */
     public function getSubcategoryId()
     {
@@ -31,7 +23,7 @@ class Subcategory extends Category
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getEnglishDesc()
     {
@@ -39,7 +31,7 @@ class Subcategory extends Category
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getFrenchDesc()
     {
@@ -47,7 +39,7 @@ class Subcategory extends Category
     }
 
     /**
-     * @param mixed $subcategoryId
+     * @param string $subcategoryId
      */
     public function setSubcategoryId($subcategoryId)
     {
@@ -55,7 +47,7 @@ class Subcategory extends Category
     }
 
     /**
-     * @param mixed $englishDesc
+     * @param string $englishDesc
      */
     public function setEnglishDesc($englishDesc)
     {
@@ -63,13 +55,34 @@ class Subcategory extends Category
     }
 
     /**
-     * @param mixed $frenchDesc
+     * @param string $frenchDesc
      */
     public function setFrenchDesc($frenchDesc)
     {
         $this->frenchDesc = $frenchDesc;
     }
 
+    
+  
+    
+    public function getSubcategory($connection, $categoryId) 
+    {
+        $counter=0;
+        $sqlCmd="Select * from subcategory where CategoryID=".$categoryId;
+        
+        foreach ($connection->query($sqlCmd) as $oneRec)
+        {
+            $subcatId=$oneRec["SubCategoryID"];
+            $engDesc = $oneRec["Desc_Eng"];
+            $freDesc = $oneRec["Desc_Fre"];
+            
+            
+            $oneCategory = new Subcategory($subcatId,$engDesc,$freDesc);
+            $arrSubCategory[$counter++]=$oneCategory;
+            
+        }
+        return  $arrSubCategory;
+    }
     
     
     

@@ -1,3 +1,69 @@
+<?php 
+include_once 'dbConfig.php';
+include_once 'Message.cls.php';
+
+
+$connection = new PDO("mysql:host=$hostname;dbname=$dbname",$username,$password);
+
+
+if($_SERVER["REQUEST_METHOD"] == "POST")
+{
+        
+       
+        $message = new Message("Hyundai", "Iwantit", 10,30);
+        $isSent = $message->sendMessage($connection);
+        
+        
+        if($isSent==true)
+        {
+            
+            echo '<script language="javascript">';
+            echo 'alert("Message sent!")';
+            echo '</script>';
+            
+            
+            
+            
+        }
+        else
+        {
+            echo '<script language="javascript">';
+            echo 'alert("Message not sent!")';
+            echo '</script>';
+            
+        }
+    
+    
+}
+
+// if(!empty($_POST["to"])&&!empty($_POST["subject"])&&!empty($_POST["message"]))
+// {
+    
+//     $message = new Message("Hyundai", "I want it", 10,30);
+//     $isSent = $message->sendMessage($connection);
+    
+    
+//     if($isSent==true)
+//     {
+//         echo "Message inserted ";
+        
+        
+        
+        
+        
+//     }
+//     else
+//     {
+//         echo '<script language="javascript">';
+//         echo 'alert("Message not sent!")';
+//         echo '</script>';
+        
+//     }
+// }
+
+
+
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -29,7 +95,7 @@
       }
       .container{
         margin: auto;
-         width: 33%;
+         width: 52%;
           padding: 10px;
           background-color:#E8E8E8;
           border-radius: 25px;
@@ -43,7 +109,7 @@
 
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">KIJIJI</a>
+  <a class="navbar-brand" href="index.php">KIJIJI</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -51,7 +117,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Go back to the ad</a>
@@ -69,26 +135,26 @@
           <h3 class="panel-title">&nbsp;&nbsp;Send a message</h3>
         </div>
         <div class="panel-body">
-            <form role="form" class="form-horizontal">
+            <form method="post" role="form" class="form-horizontal">
                 <div class="form-group">
                   <label class="col-sm-2" for="inputTo">To</label>
                   <div class="col-sm-10">
-                    <input type="email" class="form-control" id="inputTo"  readonly="true"></div>
+                    <input type="text" class="form-control" id="inputTo" name="to"  readonly="true"></div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2" for="inputSubject">Subject</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputSubject" placeholder="Subject"></div>
+                    <input type="text" class="form-control" id="inputSubject" name="subject" placeholder="Subject"></div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2" for="inputBody">Message</label>
                   <div class="col-sm-10">
-                    <textarea class="form-control" id="inputBody" rows="8" data-gramm="true" data-txt_gramm_id="71c8bb8e-8a51-c867-6c4f-5b14b864ac06" data-gramm_id="71c8bb8e-8a51-c867-6c4f-5b14b864ac06" spellcheck="false" data-gramm_editor="true" style="z-index: auto; position: relative; line-height: 26.6667px; font-size: 14px; transition: none; overflow: auto;  !important;"></textarea>
+                    <textarea class="form-control" id="inputBody" name="message" rows="8" data-gramm="true" data-txt_gramm_id="71c8bb8e-8a51-c867-6c4f-5b14b864ac06" data-gramm_id="71c8bb8e-8a51-c867-6c4f-5b14b864ac06" spellcheck="false" data-gramm_editor="true" style="z-index: auto; position: relative; line-height: 26.6667px; font-size: 14px; transition: none; overflow: auto;  !important;"></textarea>
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Send</button>
                     <div style="z-index: 2; opacity: 1; margin-left: 524px; margin-top: 10px;" class="gr-textarea-btn " data-grammarly-reactid=".3"></div>
 
                 </div>
-
+				</div>
 
             </form>
         </div>

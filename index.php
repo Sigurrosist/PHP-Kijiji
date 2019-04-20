@@ -86,10 +86,10 @@
 <div class = "container  p-3 mb-2 bg-light text-dark">
 <div class="row">
 <div class="col-md-6">
-	<p class="h2 p-3"> Search Items By Keywords </p>
+   <p class="h2 p-3"> Search Items By Keywords </p>
 </div>
 <div class="col-md-6">
-	<form class="form-inline my-2 my-lg-0 p-3">
+   <form class="form-inline my-2 my-lg-0 p-3">
       <input class="form-control mr-sm-2 " type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
@@ -102,44 +102,44 @@
 <div class="container p-3">
 <div class = "row">
 
-	<!-- First Category -->
-	<div class = "col-md-4">
-	<h4> first category </h4>
-	<!-- Sub Category for First Category start -->
-		<ul>
-		<li>Whatever second category</li>
-		<li>Whatever second category</li>
-		<li>Whatever second category</li>
-		</ul>
-	<!-- Sub Category for First Category end -->
-	</div>
-	<!-- First Category end-->
-	
-	<!-- Second Category -->
-	<div class = "col-md-4">
-	<h4> second category </h4>
-	<!-- Sub Category for Second Category start -->
-		<ul>
-		<li>Whatever second category</li>
-		<li>Whatever second category</li>
-		<li>Whatever second category</li>		
-		</ul>
-	<!-- Sub Category for Second Category end -->
-	</div>
-	<!-- Second Category end -->
-	
-	<!-- Third Category -->
-	<div class = "col-md-4">
-	<h4> third category </h4>
-	<!-- Sub Category for Third Category start -->
-		<ul>
-		<li>Whatever second category</li>
-		<li>Whatever second category</li>
-		<li>Whatever second category</li>		
-		</ul>
-	<!-- Sub Category for Third Category end -->
-	</div>
-	<!-- Third Category end -->
+   <!-- First Category -->
+   <div class = "col-md-4">
+   <h4> first category </h4>
+   <!-- Sub Category for First Category start -->
+      <ul>
+      <li>Whatever second category</li>
+      <li>Whatever second category</li>
+      <li>Whatever second category</li>
+      </ul>
+   <!-- Sub Category for First Category end -->
+   </div>
+   <!-- First Category end-->
+   
+   <!-- Second Category -->
+   <div class = "col-md-4">
+   <h4> second category </h4>
+   <!-- Sub Category for Second Category start -->
+      <ul>
+      <li>Whatever second category</li>
+      <li>Whatever second category</li>
+      <li>Whatever second category</li>      
+      </ul>
+   <!-- Sub Category for Second Category end -->
+   </div>
+   <!-- Second Category end -->
+   
+   <!-- Third Category -->
+   <div class = "col-md-4">
+   <h4> third category </h4>
+   <!-- Sub Category for Third Category start -->
+      <ul>
+      <li>Whatever second category</li>
+      <li>Whatever second category</li>
+      <li>Whatever second category</li>      
+      </ul>
+   <!-- Sub Category for Third Category end -->
+   </div>
+   <!-- Third Category end -->
 
 
 </div>

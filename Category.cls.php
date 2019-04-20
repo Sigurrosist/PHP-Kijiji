@@ -6,14 +6,13 @@ class Category
     private $englishDesc;
     private $frenchDesc;
     
-    
-    function __construct($englishDesc,$frenchDesc)
+    function __construct($categoryId=null,$englishDesc=null, $frenchDesc=null)
     {
-        $this->categoryId = self::$sequence++;
+        $this->categoryId=$categoryId;
         $this->englishDesc = $englishDesc;
         $this->frenchDesc = $frenchDesc;
     }
-        
+    
     
     /**
      * @return mixed
@@ -63,7 +62,24 @@ class Category
         $this->frenchDesc = $frenchDesc;
     }
 
-   
+    public function getCategory($connection)
+    {
+        $counter=0;
+        $sqlCmd="Select * from category";
+        
+        foreach ($connection->query($sqlCmd) as $oneRec)
+        {
+            $catId=$oneRec["CategoryID"];
+            $engDesc = $oneRec["Desc_Eng"];
+            $freDesc = $oneRec["Desc_Fre"];
+            
+            
+            $oneCategory = new Category($catId,$engDesc,$freDesc);
+            $arrCategory[$counter++]=$oneCategory;
+            
+        }
+        return $arrCategory;
+    }
     
 }
 

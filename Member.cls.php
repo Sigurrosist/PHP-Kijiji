@@ -12,19 +12,32 @@ class Member
     private $password;
     private $memberType;
     
-    function __construct($name,$address,$city,$state,$phone,$email,$password,$memberType)
+    function __construct($memberId=null,$name=null,$address=null,$city=null,$state=null,$phone=null,$email=null,$password=null,$memberType=null)
     {
-        $this->memberId = self::$sequence++;
-        $this->name = $name;
-        $this->address = $address;
-        $this->city = $city;
-        $this->state = $state;
-        $this->phone = $phone;
-        $this->email = $email;
-        $this->password = $password;
-        $this->memberType = $memberType;
-        
+        $this->memberId =$memberId;
+        $this->name=$name;
+        $this->address=$address;
+        $this->city=$city;
+        $this->state=$state;
+        $this->phone =$phone;
+        $this->email=$email;
+        $this->password=$password;
+        $this->memberType=$memberType;
     }
+    
+//     function __construct($name,$address,$city,$state,$phone,$email,$password,$memberType)
+//     {
+//         $this->memberId = self::$sequence++;
+//         $this->name = $name;
+//         $this->address = $address;
+//         $this->city = $city;
+//         $this->state = $state;
+//         $this->phone = $phone;
+//         $this->email = $email;
+//         $this->password = $password;
+//         $this->memberType = $memberType;
+        
+//     }
     
     /**
      * @return mixed
@@ -171,8 +184,9 @@ class Member
     }
 
     
-    
+   
 }
+
 
 
 ?>
