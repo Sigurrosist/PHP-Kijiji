@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 20, 2019 at 06:11 PM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 7.3.0
+-- 생성 시간: 19-04-22 10:00
+-- 서버 버전: 10.1.37-MariaDB
+-- PHP 버전: 7.3.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,39 +19,48 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `dbadvertkijiji`
+-- 데이터베이스: `dbadvertkijiji`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `advertisement`
+-- 테이블 구조 `advertisement`
 --
 
 CREATE TABLE `advertisement` (
   `AdvertID` int(11) NOT NULL,
-  `PaymentID` int(11) NOT NULL,
+  `PaymentID` int(11) DEFAULT NULL,
   `MemberID` int(11) NOT NULL,
   `SubCategoryID` int(11) NOT NULL,
   `AdvertDesc` text NOT NULL,
   `RegDate` date NOT NULL,
   `ExpDate` date NOT NULL,
   `Price` double NOT NULL,
-  `Title` varchar(100) NOT NULL
+  `Title` varchar(100) NOT NULL,
+  `PaidAd` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `advertisement`
+-- 테이블의 덤프 데이터 `advertisement`
 --
 
-INSERT INTO `advertisement` (`AdvertID`, `PaymentID`, `MemberID`, `SubCategoryID`, `AdvertDesc`, `RegDate`, `ExpDate`, `Price`, `Title`) VALUES
-(1, 1, 1, 1, 'Selling my Tesla Car', '2019-03-05', '2019-03-10', 1000, ''),
-(2, 2, 2, 3, 'A great truck is on sale!', '2019-03-09', '2019-03-13', 3500.99, '');
+INSERT INTO `advertisement` (`AdvertID`, `PaymentID`, `MemberID`, `SubCategoryID`, `AdvertDesc`, `RegDate`, `ExpDate`, `Price`, `Title`, `PaidAd`) VALUES
+(1, 1, 1, 1, 'Selling my Tesla Car', '2019-03-05', '2019-03-10', 1000, 'TESLA - tesla sale', 1),
+(2, 2, 2, 3, 'A great truck is on sale!', '2019-03-09', '2019-03-13', 3500.99, 'Truck Sale Advertisement', 1),
+(4, NULL, 1, 4, 'call us', '2019-04-29', '2019-04-29', 300, 'manager wanted', 0),
+(5, NULL, 1, 5, 'c', '2019-04-20', '2019-04-29', 1000, 'developer needed', 0),
+(6, NULL, 1, 9, 'call me', '2019-04-20', '2019-04-29', 200, 'baby needed', 0),
+(12, NULL, 1, 8, 'only wore once', '2019-04-20', '2019-04-29', 1000, 'Club Monaco Jacket', 0),
+(13, NULL, 1, 1, '22', '2019-04-20', '2019-04-29', 2000, 'Good car', 0),
+(30, NULL, 1, 1, 'sedan', '2019-04-22', '2019-05-01', 1000, 'sedan', 0),
+(31, NULL, 1, 7, 'Nobody can buy this because it is too expensive', '2019-04-22', '2019-05-01', 50000, 'Bloody expensive coat', 1),
+(32, NULL, 1, 2, 'Very powerful. Good Condition.', '2019-04-22', '2019-05-01', 25000, 'Mazda V6', 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `category`
+-- 테이블 구조 `category`
 --
 
 CREATE TABLE `category` (
@@ -61,7 +70,7 @@ CREATE TABLE `category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `category`
+-- 테이블의 덤프 데이터 `category`
 --
 
 INSERT INTO `category` (`CategoryID`, `Desc_Eng`, `Desc_Fre`) VALUES
@@ -72,7 +81,7 @@ INSERT INTO `category` (`CategoryID`, `Desc_Eng`, `Desc_Fre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `images`
+-- 테이블 구조 `images`
 --
 
 CREATE TABLE `images` (
@@ -81,10 +90,19 @@ CREATE TABLE `images` (
   `Source` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- 테이블의 덤프 데이터 `images`
+--
+
+INSERT INTO `images` (`ImageID`, `AdvertID`, `Source`) VALUES
+(1, 1, '001-001.jpg'),
+(2, 2, '002-001.jpg'),
+(3, 31, '031-001.jpg');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `luckymember`
+-- 테이블 구조 `luckymember`
 --
 
 CREATE TABLE `luckymember` (
@@ -96,7 +114,7 @@ CREATE TABLE `luckymember` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `luckymember`
+-- 테이블의 덤프 데이터 `luckymember`
 --
 
 INSERT INTO `luckymember` (`LuckyMemberID`, `MemberID`, `RegDate`, `ExpDate`, `DiscountRate`) VALUES
@@ -106,7 +124,7 @@ INSERT INTO `luckymember` (`LuckyMemberID`, `MemberID`, `RegDate`, `ExpDate`, `D
 -- --------------------------------------------------------
 
 --
--- Table structure for table `member`
+-- 테이블 구조 `member`
 --
 
 CREATE TABLE `member` (
@@ -122,17 +140,18 @@ CREATE TABLE `member` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `member`
+-- 테이블의 덤프 데이터 `member`
 --
 
 INSERT INTO `member` (`MemberID`, `Name`, `Address`, `City`, `State`, `Phone`, `Email`, `Password`, `MemberType`) VALUES
 (1, 'Judy Mok', '1819 Beaubien East', 'Montreal', 'Quebec', '514-549-5016', 'sigurrosist@gmail.com', '1234', 1),
-(2, 'Seungyeon', '2000 Ste.Catherine', 'Montreal', 'Quebec', '514-516-1135', 'seungyeon@gmail.com', '1234', 2);
+(2, 'Seungyeon', '2000 Ste.Catherine', 'Montreal', 'Quebec', '514-516-1135', 'seungyeon@gmail.com', '1234', 2),
+(3, 'Admin Admin', '1827 Admin Road', 'Admin', 'Admin', '7894561230', 'admin@admin.com', '1234', 2);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `message`
+-- 테이블 구조 `message`
 --
 
 CREATE TABLE `message` (
@@ -146,16 +165,20 @@ CREATE TABLE `message` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `message`
+-- 테이블의 덤프 데이터 `message`
 --
 
 INSERT INTO `message` (`MessageID`, `Title`, `Message`, `CreateDate`, `Sender`, `Receiver`, `New`) VALUES
-(1, 'Hyundai', 'Iwantit', '2019-04-19', 10, 30, 1);
+(1, 'Hyundai', 'Iwantit', '2019-04-19', 10, 30, 1),
+(2, 'What\'sup', 'I wanna buy', '2019-04-21', 2, 1, 1),
+(3, 'How r u', 'Do u wanna meet?', '2019-04-21', 2, 1, 1),
+(4, 'ur jacket', 'I want it', '2019-04-21', 1, 2, 1),
+(5, 'your coat', 'I wanna buy it', '2019-04-21', 1, 2, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `payment`
+-- 테이블 구조 `payment`
 --
 
 CREATE TABLE `payment` (
@@ -166,7 +189,7 @@ CREATE TABLE `payment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `payment`
+-- 테이블의 덤프 데이터 `payment`
 --
 
 INSERT INTO `payment` (`PaymentID`, `NumberOfImage`, `Duration`, `TotalPayment`) VALUES
@@ -176,7 +199,7 @@ INSERT INTO `payment` (`PaymentID`, `NumberOfImage`, `Duration`, `TotalPayment`)
 -- --------------------------------------------------------
 
 --
--- Table structure for table `subcategory`
+-- 테이블 구조 `subcategory`
 --
 
 CREATE TABLE `subcategory` (
@@ -187,7 +210,7 @@ CREATE TABLE `subcategory` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `subcategory`
+-- 테이블의 덤프 데이터 `subcategory`
 --
 
 INSERT INTO `subcategory` (`SubCategoryID`, `CategoryID`, `Desc_Eng`, `Desc_Fre`) VALUES
@@ -202,11 +225,11 @@ INSERT INTO `subcategory` (`SubCategoryID`, `CategoryID`, `Desc_Eng`, `Desc_Fre`
 (9, 3, 'Baby', 'Bébé');
 
 --
--- Indexes for dumped tables
+-- 덤프된 테이블의 인덱스
 --
 
 --
--- Indexes for table `advertisement`
+-- 테이블의 인덱스 `advertisement`
 --
 ALTER TABLE `advertisement`
   ADD PRIMARY KEY (`AdvertID`),
@@ -215,108 +238,108 @@ ALTER TABLE `advertisement`
   ADD KEY `SubCategoryID` (`SubCategoryID`);
 
 --
--- Indexes for table `category`
+-- 테이블의 인덱스 `category`
 --
 ALTER TABLE `category`
   ADD PRIMARY KEY (`CategoryID`);
 
 --
--- Indexes for table `images`
+-- 테이블의 인덱스 `images`
 --
 ALTER TABLE `images`
   ADD PRIMARY KEY (`ImageID`),
   ADD KEY `AdvertID` (`AdvertID`);
 
 --
--- Indexes for table `luckymember`
+-- 테이블의 인덱스 `luckymember`
 --
 ALTER TABLE `luckymember`
   ADD PRIMARY KEY (`LuckyMemberID`),
   ADD KEY `MemberID` (`MemberID`);
 
 --
--- Indexes for table `member`
+-- 테이블의 인덱스 `member`
 --
 ALTER TABLE `member`
   ADD PRIMARY KEY (`MemberID`);
 
 --
--- Indexes for table `message`
+-- 테이블의 인덱스 `message`
 --
 ALTER TABLE `message`
   ADD PRIMARY KEY (`MessageID`);
 
 --
--- Indexes for table `payment`
+-- 테이블의 인덱스 `payment`
 --
 ALTER TABLE `payment`
   ADD PRIMARY KEY (`PaymentID`);
 
 --
--- Indexes for table `subcategory`
+-- 테이블의 인덱스 `subcategory`
 --
 ALTER TABLE `subcategory`
   ADD PRIMARY KEY (`SubCategoryID`),
   ADD KEY `CategoryID` (`CategoryID`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- 덤프된 테이블의 AUTO_INCREMENT
 --
 
 --
--- AUTO_INCREMENT for table `advertisement`
+-- 테이블의 AUTO_INCREMENT `advertisement`
 --
 ALTER TABLE `advertisement`
-  MODIFY `AdvertID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `AdvertID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
--- AUTO_INCREMENT for table `category`
+-- 테이블의 AUTO_INCREMENT `category`
 --
 ALTER TABLE `category`
   MODIFY `CategoryID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `images`
+-- 테이블의 AUTO_INCREMENT `images`
 --
 ALTER TABLE `images`
-  MODIFY `ImageID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ImageID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `luckymember`
+-- 테이블의 AUTO_INCREMENT `luckymember`
 --
 ALTER TABLE `luckymember`
   MODIFY `LuckyMemberID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `member`
+-- 테이블의 AUTO_INCREMENT `member`
 --
 ALTER TABLE `member`
-  MODIFY `MemberID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `MemberID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `message`
+-- 테이블의 AUTO_INCREMENT `message`
 --
 ALTER TABLE `message`
-  MODIFY `MessageID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `MessageID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `payment`
+-- 테이블의 AUTO_INCREMENT `payment`
 --
 ALTER TABLE `payment`
   MODIFY `PaymentID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `subcategory`
+-- 테이블의 AUTO_INCREMENT `subcategory`
 --
 ALTER TABLE `subcategory`
   MODIFY `SubCategoryID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- Constraints for dumped tables
+-- 덤프된 테이블의 제약사항
 --
 
 --
--- Constraints for table `advertisement`
+-- 테이블의 제약사항 `advertisement`
 --
 ALTER TABLE `advertisement`
   ADD CONSTRAINT `advertisement_ibfk_1` FOREIGN KEY (`SubCategoryID`) REFERENCES `subcategory` (`SubCategoryID`),
@@ -324,19 +347,19 @@ ALTER TABLE `advertisement`
   ADD CONSTRAINT `advertisement_ibfk_3` FOREIGN KEY (`PaymentID`) REFERENCES `payment` (`PaymentID`);
 
 --
--- Constraints for table `images`
+-- 테이블의 제약사항 `images`
 --
 ALTER TABLE `images`
   ADD CONSTRAINT `images_ibfk_1` FOREIGN KEY (`AdvertID`) REFERENCES `advertisement` (`AdvertID`);
 
 --
--- Constraints for table `luckymember`
+-- 테이블의 제약사항 `luckymember`
 --
 ALTER TABLE `luckymember`
   ADD CONSTRAINT `luckymember_ibfk_1` FOREIGN KEY (`MemberID`) REFERENCES `member` (`MemberID`);
 
 --
--- Constraints for table `subcategory`
+-- 테이블의 제약사항 `subcategory`
 --
 ALTER TABLE `subcategory`
   ADD CONSTRAINT `subcategory_ibfk_1` FOREIGN KEY (`CategoryID`) REFERENCES `category` (`CategoryID`);
