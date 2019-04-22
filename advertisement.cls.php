@@ -120,7 +120,14 @@ class Advertisement
         return  $result;
     }
     
-    
+    public function deleteanAd($connection,$advertId)
+    {
+        $sqlCmd="Delete from advertisement where AdvertID=".$advertId;
+        
+        $result = $connection->exec($sqlCmd);
+        
+        return $result;
+    }
     
     
     

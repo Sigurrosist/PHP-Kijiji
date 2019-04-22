@@ -31,7 +31,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                     if($register == true)
                     {
                         echo '<script language="javascript"> alert("New member is registered. Please login.");</script>';
-                        header("location:signin.php");
+                        header("location:signIn.php");
                     }
                 }
                 catch (PDOException $e)
@@ -174,7 +174,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
   <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">KIJIJI</a>
+  <a class="navbar-brand" href="index.php">KIJIJI</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -185,7 +185,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         <a class="nav-link" href="#">member <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="signIn.html">Sign in</a>
+        <a class="nav-link" href="signIn.php">Sign in</a>
       </li>
     </ul>
   </div>

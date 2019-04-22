@@ -1,6 +1,8 @@
 <?php
 include_once 'dbConfig.php';
 
+
+
 $connection = new PDO("mysql:host=$hostname;dbname=$dbname",$username,$password);
 
 
@@ -15,10 +17,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         
         if(!empty($member))
         {
-            echo "Member exist ";
-            $_SESSION['login_user'] = $member;
-            
-            header('location: http://localhost/phpKijiji/index.php');
+            session_start();
+            $_SESSION['refUser'] = $member['MemberID'];
+            $_SESSION['username']   = $member['Name'];
+            $_SESSION['time']     = time();
+            header('location: index.php');
             die;
             
         }
@@ -32,13 +35,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     }
     
 }
-
-
-
-
-
-
-
 
 ?>
 <!doctype html>
@@ -113,7 +109,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
   <button class="btn btn-lg btn-primary btn-block" type="submit" >Sign in</button>
 
   <div class="etc-login-form">
-              <p>new user? <a href="registration.php">create new account</a></p>
+  				<p>new user? <a href="registration.php">create new account</a></p>
   </div>
 
 

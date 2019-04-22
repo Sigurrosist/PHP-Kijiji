@@ -7,7 +7,6 @@ class Image
     
     function __construct($imageSource)
     {
-        $this->teacherId = self::$sequence++;
         $this->imageSource = $imageSource;
         
     }

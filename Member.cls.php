@@ -12,9 +12,8 @@ class Member
     private $password;
     private $memberType;
     
-    function __construct($memberId=null,$name=null,$address=null,$city=null,$state=null,$phone=null,$email=null,$password=null,$memberType=null)
+    function __construct($name=null,$address=null,$city=null,$state=null,$phone=null,$email=null,$password=null,$memberType=null)
     {
-        $this->memberId =$memberId;
         $this->name=$name;
         $this->address=$address;
         $this->city=$city;
@@ -175,7 +174,12 @@ class Member
         $insert = $connection->exec($sql);
         return $insert;
     }
-    
+    public function deleteMember($connection, $memberID)
+    {
+        $sql = "delete from member where MemberID=$memberID";
+        $delete = $connection->exec($sql);
+        return $delete;
+    }
     
 }
 

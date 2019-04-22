@@ -29,7 +29,7 @@ class Subcategory extends Category
     {
         return $this->subcategoryId;
     }
-
+    
     /**
      * @return mixed
      */
@@ -37,7 +37,7 @@ class Subcategory extends Category
     {
         return $this->englishDesc;
     }
-
+    
     /**
      * @return mixed
      */
@@ -45,7 +45,7 @@ class Subcategory extends Category
     {
         return $this->frenchDesc;
     }
-
+    
     /**
      * @param mixed $subcategoryId
      */
@@ -53,7 +53,7 @@ class Subcategory extends Category
     {
         $this->subcategoryId = $subcategoryId;
     }
-
+    
     /**
      * @param mixed $englishDesc
      */
@@ -61,7 +61,7 @@ class Subcategory extends Category
     {
         $this->englishDesc = $englishDesc;
     }
-
+    
     /**
      * @param mixed $frenchDesc
      */
@@ -69,7 +69,7 @@ class Subcategory extends Category
     {
         $this->frenchDesc = $frenchDesc;
     }
-
+    
     
     
     
