@@ -7,5 +7,5 @@ if(mysqli_connect_error())
     //echo "Connection failed :".mysqli_connect_error()." <br />";
     header("location:connectionError.php");
 } 
-
+ 
 ?>
