@@ -2,6 +2,44 @@
 include_once 'dbConfig.php';
 
 $connection = new PDO("mysql:host=$hostname;dbname=$dbname",$username,$password);
+
+
+if($_SERVER["REQUEST_METHOD"] == "POST")
+{
+    if(!empty($_POST["email"])&&!empty($_POST["password"]))
+    {
+        $email=$_POST['email'];
+        $pass=$_POST['password'];
+        $stmt = $connection->query("SELECT * FROM member where Email= '$email' AND Password='$pass'");
+        $member = $stmt->fetch();
+        
+        if(!empty($member))
+        {
+            echo "Member exist ";
+            $_SESSION['login_user'] = $member;
+            
+            header('location: http://localhost/phpKijiji/index.php');
+            die;
+            
+        }
+        else
+        {
+            echo '<script language="javascript">';
+            echo 'alert("Email address or password is not correct")';
+            echo '</script>';
+            
+        }
+    }
+    
+}
+
+
+
+
+
+
+
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -44,7 +82,7 @@ $connection = new PDO("mysql:host=$hostname;dbname=$dbname",$username,$password)
 
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">KIJIJI</a>
+  <a class="navbar-brand" href="index.php">KIJIJI</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -52,7 +90,7 @@ $connection = new PDO("mysql:host=$hostname;dbname=$dbname",$username,$password)
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="registration.php">Registration</a>
@@ -64,18 +102,18 @@ $connection = new PDO("mysql:host=$hostname;dbname=$dbname",$username,$password)
 <br><br><br>
 
 <div class="d-flex justify-content-center">
-<form class="form-signin">
+<form class="form-signin" method="post" action="#">
   <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
   <h1 class="h3 mb-3 font-weight-normal">Sign in</h1>
   <label for="inputEmail" class="sr-only">Email address</label>
-  <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+  <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required autofocus>
   <label for="inputPassword" class="sr-only">Password</label>
-  <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+  <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
   <br>
-  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+  <button class="btn btn-lg btn-primary btn-block" type="submit" >Sign in</button>
 
   <div class="etc-login-form">
-  				<p>new user? <a href="registration.html">create new account</a></p>
+              <p>new user? <a href="registration.php">create new account</a></p>
   </div>
 
 

@@ -1,3 +1,17 @@
+<?php
+include_once 'dbConfig.php';
+include_once 'advertisement.cls.php';
+
+$connection = new PDO("mysql:host=$hostname;dbname=$dbname",$username,$password);
+
+//$sqlImage = "select * from images where ImageID = ".$row["AdvertID"];
+$advert = "select * from advertisement";
+$test=$connection->prepare($advert);
+$test->execute();
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
@@ -23,11 +37,11 @@
       </li>
       <li class="nav-item">
 <!-- Start Register button -->
-        <a class="nav-link" href="#">Register</a>
+        <a class="nav-link" href="registration.php">Register</a>
       </li>
       <li class="nav-item">
 <!-- Start Post button -->
-        <a class="nav-link" href="#">Post</a>
+        <a class="nav-link" href="postAd.php">Post</a>
       </li>
       <li class="nav-item">
 <!-- Start Language button -->
@@ -35,44 +49,28 @@
       </li>
       <li class="nav-item">
 <!-- Start Login button -->
-        <a class="nav-link" href="#">Log In</a>
+        <a class="nav-link" href="signIn.php">Log In</a>
       </li>
     </ul>
    </div>
 </div>
 </nav>
 <!--  Special Ads  -->
-<a href="#"><h2 class="p-3">Special Ads </h2></a>
+<a href="#"><h2 class="p-3">Special Ads</h2></a> 
 <div class="card-group">
-<!-- First Card -->
-<div class="card" style="width: 18rem;">
-  <img class="card-img-top" src="..." alt="Card image cap">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>
-<!-- Second Card -->
-<div class="card" style="width: 18rem;">
-  <img class="card-img-top" src="..." alt="Card image cap">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>
-<!-- Third Card -->
-<div class="card" style="width: 18rem;">
-  <img class="card-img-top" src="..." alt="Card image cap">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>
-</div>
+<?php 
+foreach ($test->fetchAll(PDO::FETCH_ASSOC) as $row2)
+{    
+    echo "<a href= 'ItemView.php?id=".$row2["AdvertID"]."'><div class='card border-success mb-3' style='max-width: 18rem;'>
+          <div class='card-header'>".$row2["Title"]."  </div>
+          <div class='card-body text-success'>
+            <h5 class='card-title'>$".$row2["Price"]."</h5>
+            <p class='card-text'>".$row2["AdvertDesc"]."</p></div>
+          </div></a>";
+}
 
+?>
+</div>
 
 <!-- divider -->
 
@@ -102,44 +100,34 @@
 <div class="container p-3">
 <div class = "row">
 
-	<!-- First Category -->
-	<div class = "col-md-4">
-	<h4> first category </h4>
-	<!-- Sub Category for First Category start -->
-		<ul>
-		<li>Whatever second category</li>
-		<li>Whatever second category</li>
-		<li>Whatever second category</li>
-		</ul>
-	<!-- Sub Category for First Category end -->
-	</div>
-	<!-- First Category end-->
-	
-	<!-- Second Category -->
-	<div class = "col-md-4">
-	<h4> second category </h4>
-	<!-- Sub Category for Second Category start -->
-		<ul>
-		<li>Whatever second category</li>
-		<li>Whatever second category</li>
-		<li>Whatever second category</li>		
-		</ul>
-	<!-- Sub Category for Second Category end -->
-	</div>
-	<!-- Second Category end -->
-	
-	<!-- Third Category -->
-	<div class = "col-md-4">
-	<h4> third category </h4>
-	<!-- Sub Category for Third Category start -->
-		<ul>
-		<li>Whatever second category</li>
-		<li>Whatever second category</li>
-		<li>Whatever second category</li>		
-		</ul>
-	<!-- Sub Category for Third Category end -->
-	</div>
-	<!-- Third Category end -->
+
+<?php 
+
+$category = "select * from category";
+$test=$connection->prepare($category);
+$test->execute();
+foreach ($test->fetchAll(PDO::FETCH_ASSOC) as $row2)
+{
+    echo "<!-- Category Name-->
+            <div class = 'col-md-4'>
+            	<h4> ".$row2["Desc_Eng"]." </h4>
+            	<!-- Sub Category start -->
+		          <ul>";
+        
+        $subcategory = "select * from subcategory where CategoryID = ".$row2["CategoryID"];
+        $test2 = $connection->prepare($subcategory);
+        $test2->execute();
+        foreach ($test2 -> fetchAll(PDO::FETCH_ASSOC) as $row3)
+        {
+            echo "<a href='categoryArticle.php?id=".$row3["SubCategoryID"]."'> <li>".$row3["Desc_Eng"]."</li> </a>";
+        }
+echo "</ul>
+	<!-- Sub Category end -->
+	</div>";
+}
+
+?>
+
 
 
 </div>

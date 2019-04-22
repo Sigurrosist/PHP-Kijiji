@@ -185,7 +185,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         <a class="nav-link" href="#">member <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="signin.html">Sign in</a>
+        <a class="nav-link" href="signIn.html">Sign in</a>
       </li>
     </ul>
   </div>

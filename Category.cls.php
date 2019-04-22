@@ -13,7 +13,7 @@ class Category
         $this->englishDesc = $englishDesc;
         $this->frenchDesc = $frenchDesc;
     }
-        
+    
     
     /**
      * @return mixed
@@ -22,7 +22,7 @@ class Category
     {
         return $this->categoryId;
     }
-
+    
     /**
      * @return mixed
      */
@@ -30,7 +30,7 @@ class Category
     {
         return $this->englishDesc;
     }
-
+    
     /**
      * @return mixed
      */
@@ -38,7 +38,7 @@ class Category
     {
         return $this->frenchDesc;
     }
-
+    
     /**
      * @param mixed $categoryId
      */
@@ -46,7 +46,7 @@ class Category
     {
         $this->categoryId = $categoryId;
     }
-
+    
     /**
      * @param mixed $englishDesc
      */
@@ -54,7 +54,7 @@ class Category
     {
         $this->englishDesc = $englishDesc;
     }
-
+    
     /**
      * @param mixed $frenchDesc
      */
@@ -62,8 +62,8 @@ class Category
     {
         $this->frenchDesc = $frenchDesc;
     }
-
-   
+    
+    
     
 }
 

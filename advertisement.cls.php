@@ -1,20 +1,23 @@
 <?php
 
-class Advertisement 
+class Advertisement
 {
     private $advertId;
     private $advertDesc;
     private $regDate;
     private $expDate;
+    private $price;
+    private $title;
     
-    function __construct($advertDesc,$regDate,$expDate)
+    
+    function __construct($advertDesc=null,$price=null,$title=null)
     {
-        $this->advertId = self::$sequence++;
-        $this->advertDesc = $advertDesc;
-        $this->regDate = $regDate;
-        $this->expDate = $expDate;
         
-        
+        $this->advertDesc=$advertDesc;
+        $this->regDate=new DateTime();
+        $this->expDate=new DateTime();
+        $this->price=$price;
+        $this->title=$title;
     }
     
     /**
@@ -24,7 +27,7 @@ class Advertisement
     {
         return $this->advertId;
     }
-
+    
     /**
      * @return mixed
      */
@@ -32,7 +35,7 @@ class Advertisement
     {
         return $this->advertDesc;
     }
-
+    
     /**
      * @return mixed
      */
@@ -40,7 +43,7 @@ class Advertisement
     {
         return $this->regDate;
     }
-
+    
     /**
      * @return mixed
      */
@@ -48,7 +51,7 @@ class Advertisement
     {
         return $this->expDate;
     }
-
+    
     /**
      * @param mixed $advertId
      */
@@ -56,7 +59,7 @@ class Advertisement
     {
         $this->advertId = $advertId;
     }
-
+    
     /**
      * @param mixed $advertDesc
      */
@@ -64,7 +67,7 @@ class Advertisement
     {
         $this->advertDesc = $advertDesc;
     }
-
+    
     /**
      * @param mixed $regDate
      */
@@ -72,7 +75,7 @@ class Advertisement
     {
         $this->regDate = $regDate;
     }
-
+    
     /**
      * @param mixed $expDate
      */
@@ -81,8 +84,42 @@ class Advertisement
         $this->expDate = $expDate;
     }
     
+    public function postFreeAd($connection,$memberId,$subCaregoryId)
+    {
+        
+        $advertDesc=$this->advertDesc;
+        $regDate=new DateTime('now');
+        $regTimeAsString = $regDate->format('Y-m-d H:i:s');
+        $expDate=$regDate->modify('+9 day');
+        $expTimeAsString = $expDate->format('Y-m-d H:i:s');
+        $price=$this->price;
+        $title=$this->title;
+        
+        
+        $sqlCmd="Insert into advertisement  (MemberID,SubCategoryID,AdvertDesc,RegDate,ExpDate,Price,Title) values($memberId,$subCaregoryId,'$advertDesc', '$regTimeAsString','$expTimeAsString',$price,'$title')";
+        
+        $result = $connection->exec($sqlCmd);
+        return  $result;
+    }
     
-
+    public function postPaidAd($connection,$paymentId,$memberId,$subCaregoryId)
+    {
+        
+        $advertDesc=$this->advertDesc;
+        $regDate=new DateTime('now');
+        $expDate=$regDate->modify('+9 day');
+        $regTimeAsString = $regDate->format('Y-m-d H:i:s');
+        $expTimeAsString = $expDate->format('Y-m-d H:i:s');
+        $price=$this->price;
+        $title=$this->title;
+        
+        
+        $sqlCmd="Insert into advertisement  (MemberID,PaymentID,SubCategoryID,AdvertDesc,RegDate,ExpDate,Price,Title) values($memberId,$paymentId,$subCaregoryId,'$advertDesc', '$regTimeAsString','$expTimeAsString',$price,'$title')";
+        
+        $result = $connection->exec($sqlCmd);
+        return  $result;
+    }
+    
     
     
     
