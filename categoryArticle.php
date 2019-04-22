@@ -33,7 +33,7 @@
       .etc-login-form p {
         margin-bottom: 5px;
       }
-
+ 
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;

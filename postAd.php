@@ -1,7 +1,7 @@
 <?php
 include_once 'db.php';
 include_once 'advertisement.cls.php';
-
+include_once 'image.cls.php';
 
 
 
@@ -13,7 +13,7 @@ include_once 'advertisement.cls.php';
 //     //Get the temp file path
 //     $tmpFilePath = $_FILES['upload']['tmp_name'][$i];
     
-//     //Make sure we have a file path
+//     //Make sure we have a file pathz
 //     if ($tmpFilePath != ""){
 //         //Setup our new file path
 //         $newFilePath = "./uploadFiles/" . $_FILES['upload']['name'][$i];
@@ -144,7 +144,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     
 <script type="text/javascript">
 function myFunction(){
-	  var x = document.getElementById("upload");
+	  var x = document.getElementById("file");
 	  var txt = "";
 	  if ('files' in x) {
 	      if (x.files.length == 0) {
@@ -199,7 +199,9 @@ $(document).ready(function()
 	
 });
 
-function validateForm() {
+function validateForm() 
+{
+	  
 	  var x = document.forms["myForm"]["title"].value;
 	  if (x == "") {
 	    alert("Title must be filled out");
@@ -224,6 +226,8 @@ function validateForm() {
 		  return true;
 	  }
 	}
+
+
 </script>
 
 </head>
@@ -246,7 +250,7 @@ function validateForm() {
 </nav>
 <br /><br /><br /><br />
 <div class="center">
-<form name="myForm" method="post" onsubmit="return validateForm()" enctype='multipart/form-data'>
+<form name="myForm" method="post" onsubmit="return validateForm()" enctype="multipart/form-data">
  
 <h4>Add New Post</h4>
                 
@@ -281,7 +285,7 @@ function validateForm() {
 <textarea id="message" name="message" placeholder="Enter Message here"  ></textarea>
 <br />
 
-<input type="file" name="upload[]" id="upload" multiple size="10" onchange="myFunction()">
+<input name="file[]" id="file" type="file" multiple size="10" onchange="myFunction();">
 <br /><br />
 <button class="btn btn-gray"  type="submit" >Add New Post</button>  
 
